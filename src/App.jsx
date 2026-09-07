@@ -1,6 +1,14 @@
+function Header({ title }) {
+  return (
+    <h1>
+      {title}
+    </h1>
+  )
+}
+
 function App() {
   return (
-    <h1>Lista de tarefas</h1>
+    <Header title={"Lista de tarefas"} />
   );
 }
 
