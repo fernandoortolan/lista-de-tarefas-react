@@ -3,22 +3,30 @@ function Header({ title }) {
     <h1>
       {title}
     </h1>
-  )
+  );
+}
+
+function ToDoList({ list }) {
+  const listItems = list.map(item => <li>{item}</li>);
+
+  return (
+    <ul>
+      {listItems}
+    </ul>
+  );
 }
 
 function App() {
-  const tarefas = [
+  const tasks = [
     'Fazer exercício',
     'Ler documentação',
     'Lavar cafeteira',
   ];
 
-  const itensDaLista = tarefas.map(tarefa => <li>{tarefa}</li>);
-
   return (
     <>
       <Header title={"Lista de tarefas"} />
-      <ul>{itensDaLista}</ul>
+      <ToDoList list={tasks} />
     </>
   );
 }
