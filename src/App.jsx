@@ -14,16 +14,16 @@ function Checkbox() {
   );
 }
 
-function DeleteTaskButton() {
+function DeleteTaskButton({ deleteTask }) {
   return (
-    <button>Excluir</button>
+    <button onClick={deleteTask}>Excluir</button>
   );
 }
 
-function ToDoList({ list }) {
+function ToDoList({ list, deleteTask }) {
   const listItems = list.map(item =>
     <li key={item.id}>
-      <Checkbox /> {item.task} <DeleteTaskButton />
+      <Checkbox /> {item.task} <DeleteTaskButton deleteTask={() => deleteTask(item.id)} />
     </li>
   );
 
@@ -65,6 +65,10 @@ function App() {
     setInputValue('');
   };
 
+  function deleteTask(id) {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+
   return (
     <>
       <Header title={"Lista de tarefas"} />
@@ -74,7 +78,7 @@ function App() {
         onChange={handleChange}
       />
       <AddTaskButton onClick={handleSubmit} />
-      <ToDoList list={tasks} />
+      <ToDoList list={tasks} deleteTask={deleteTask} />
     </>
   );
 }
