@@ -9,7 +9,7 @@ function Header({ title }) {
 }
 
 function ToDoList({ list }) {
-  const listItems = list.map(item => <li>{item}</li>);
+  const listItems = list.map(item => <li key={item.id}>id: {item.id} - task: {item.task}</li>);
 
   return (
     <ul>
@@ -44,7 +44,8 @@ function App() {
   }
 
   const handleSubmit = () => {
-    setTasks([...tasks, inputValue]);
+    const uuid = crypto.randomUUID();
+    setTasks([...tasks, { id: uuid, task: inputValue }]);
     setInputValue('');
   };
 
