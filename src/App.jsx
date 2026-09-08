@@ -16,6 +16,12 @@ function ToDoList({ list }) {
   );
 }
 
+function Input() {
+  return (
+    <input type="text"></input>
+  )
+}
+
 function App() {
   const tasks = [
     'Fazer exercício',
@@ -26,6 +32,7 @@ function App() {
   return (
     <>
       <Header title={"Lista de tarefas"} />
+      <Input />
       <ToDoList list={tasks} />
     </>
   );
