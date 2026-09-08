@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function Header({ title }) {
   return (
     <h1>
@@ -16,30 +18,45 @@ function ToDoList({ list }) {
   );
 }
 
-function Input() {
+function Input({ value, onChange }) {
   return (
-    <input type="text"></input>
+    <input
+      type="text"
+      value={value}
+      onChange={onChange}
+    >
+    </input>
   );
 }
 
-function AddTaskButton() {
+function AddTaskButton({ onClick }) {
   return (
-    <button>Adicionar</button>
+    <button onClick={onClick}>Adicionar</button>
   );
 }
 
 function App() {
-  const tasks = [
-    'Fazer exercício',
-    'Ler documentação',
-    'Lavar cafeteira',
-  ];
+  const [tasks, setTasks] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  }
+
+  const handleSubmit = () => {
+    setTasks([...tasks, inputValue]);
+    setInputValue('');
+  };
 
   return (
     <>
       <Header title={"Lista de tarefas"} />
-      <Input />
-      <AddTaskButton />
+
+      <Input
+        value={inputValue}
+        onChange={handleChange}
+      />
+      <AddTaskButton onClick={handleSubmit} />
       <ToDoList list={tasks} />
     </>
   );
