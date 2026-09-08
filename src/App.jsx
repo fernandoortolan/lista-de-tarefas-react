@@ -19,7 +19,13 @@ function ToDoList({ list }) {
 function Input() {
   return (
     <input type="text"></input>
-  )
+  );
+}
+
+function AddTaskButton() {
+  return (
+    <button>Adicionar</button>
+  );
 }
 
 function App() {
@@ -33,6 +39,7 @@ function App() {
     <>
       <Header title={"Lista de tarefas"} />
       <Input />
+      <AddTaskButton />
       <ToDoList list={tasks} />
     </>
   );
