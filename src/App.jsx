@@ -14,11 +14,16 @@ function Checkbox() {
   );
 }
 
+function DeleteTaskButton() {
+  return (
+    <button>Excluir</button>
+  );
+}
+
 function ToDoList({ list }) {
   const listItems = list.map(item =>
     <li key={item.id}>
-      <Checkbox />
-      {item.task}
+      <Checkbox /> {item.task} <DeleteTaskButton />
     </li>
   );
 
