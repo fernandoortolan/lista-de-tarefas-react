@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './App.css';
 
 function Header({ title }) {
   return (
@@ -8,9 +9,9 @@ function Header({ title }) {
   );
 }
 
-function Checkbox() {
+function Checkbox({ changeTaskStatus }) {
   return (
-    <input type="checkbox"></input>
+    <input type="checkbox" onClick={changeTaskStatus}></input>
   );
 }
 
@@ -20,10 +21,14 @@ function DeleteTaskButton({ deleteTask }) {
   );
 }
 
-function ToDoList({ list, deleteTask }) {
+function ToDoList({ list, deleteTask, changeTaskStatus }) {
   const listItems = list.map(item =>
     <li key={item.id}>
-      <Checkbox /> {item.task} <DeleteTaskButton deleteTask={() => deleteTask(item.id)} />
+      <Checkbox changeTaskStatus={() => changeTaskStatus(item.id)} />
+      <span className="spacing"></span>
+      <span className={item.completed ? 'checked' : ''}>{item.task}</span>
+      <span className="spacing"></span>
+      <DeleteTaskButton deleteTask={() => deleteTask(item.id)} />
     </li>
   );
 
@@ -61,12 +66,23 @@ function App() {
 
   const handleSubmit = () => {
     const uuid = crypto.randomUUID();
-    setTasks([...tasks, { id: uuid, task: inputValue }]);
+    setTasks([...tasks, { id: uuid, task: inputValue, completed: false }]);
     setInputValue('');
   };
 
   function deleteTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
+  }
+
+  function changeTaskStatus(id) {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          task.completed = task.completed ? false : true;
+        }
+        return task;
+      })
+    );
   }
 
   return (
@@ -78,7 +94,7 @@ function App() {
         onChange={handleChange}
       />
       <AddTaskButton onClick={handleSubmit} />
-      <ToDoList list={tasks} deleteTask={deleteTask} />
+      <ToDoList list={tasks} deleteTask={deleteTask} changeTaskStatus={changeTaskStatus} />
     </>
   );
 }
