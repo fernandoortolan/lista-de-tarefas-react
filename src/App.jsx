@@ -11,7 +11,7 @@ function Header({ title }) {
 
 function Info() {
   return (
-    <p>Tarefas concluídas: 0</p>
+    <p className="info-completed-tasks">Tarefas concluídas: 0</p>
   );
 }
 
@@ -110,7 +110,7 @@ function App() {
           <AddTaskButton onClick={handleSubmit} />
         </div>
       </div>
-      <div>
+      <div className="info-container">
         <Info />
       </div>
       <div className="todo-list-container">
