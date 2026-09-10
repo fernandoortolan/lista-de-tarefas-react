@@ -99,6 +99,7 @@ function App() {
   }
 
   const completedTasks = tasks.filter((task) => task.completed).length;
+  const pendingTasks = tasks.filter((task) => !task.completed).length;
 
   return (
     <div className="todo">
@@ -118,6 +119,10 @@ function App() {
         <Info
           content={"Tarefas concluídas: " + completedTasks}
           className="info-completed-tasks"
+        />
+        <Info
+          content={"Tarefas pendentes: " + pendingTasks}
+          className=""
         />
       </div>
       <div className="todo-list-container">
