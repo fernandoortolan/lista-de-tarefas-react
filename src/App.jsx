@@ -149,9 +149,9 @@ function App() {
           content={"Tarefas pendentes: " + pendingTasks}
           className="info-pending-tasks"
         />
-      </div>
-      <div>
-        <DeleteCompletedTasksButton deleteCompletedTasks={deleteCompletedTasks} />
+        <div>
+          <DeleteCompletedTasksButton deleteCompletedTasks={deleteCompletedTasks} />
+        </div>
       </div>
       <div className="todo-list-container">
         <ToDoList
