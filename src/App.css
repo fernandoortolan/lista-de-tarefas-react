@@ -107,6 +107,10 @@
   color: green;
 }
 
+.info-pending-tasks {
+  color: blue;
+}
+
 /* LISTA */
 
 .todo-list-container ul {

@@ -122,7 +122,7 @@ function App() {
         />
         <Info
           content={"Tarefas pendentes: " + pendingTasks}
-          className=""
+          className="info-pending-tasks"
         />
       </div>
       <div className="todo-list-container">
