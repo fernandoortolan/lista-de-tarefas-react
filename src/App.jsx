@@ -9,6 +9,12 @@ function Header({ title }) {
   );
 }
 
+function Info() {
+  return (
+    <p>Tarefas concluídas: 0</p>
+  );
+}
+
 function Checkbox({ changeTaskStatus }) {
   return (
     <input type="checkbox" onClick={changeTaskStatus}></input>
@@ -103,6 +109,9 @@ function App() {
         <div>
           <AddTaskButton onClick={handleSubmit} />
         </div>
+      </div>
+      <div>
+        <Info />
       </div>
       <div className="todo-list-container">
         <ToDoList
