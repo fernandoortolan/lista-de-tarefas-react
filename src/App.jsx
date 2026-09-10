@@ -22,12 +22,12 @@ function DeleteTaskButton({ deleteTask }) {
 }
 
 function ToDoList({ list, deleteTask, changeTaskStatus }) {
-  const listItems = list.map(item =>
-    <li key={item.id}>
-      <Checkbox changeTaskStatus={() => changeTaskStatus(item.id)} />
-      <span className="spacing"></span>
-      <span className={item.completed ? 'checked' : ''}>{item.task}</span>
-      <span className="spacing"></span>
+  const listItems = list.map((item) =>
+    <li key={item.id} className="task">
+      <div className="task-content">
+        <Checkbox changeTaskStatus={() => changeTaskStatus(item.id)} />
+        <span className={item.completed ? 'checked' : ''}>{item.task}</span>
+      </div>
       <DeleteTaskButton deleteTask={() => deleteTask(item.id)} />
     </li>
   );
@@ -39,12 +39,13 @@ function ToDoList({ list, deleteTask, changeTaskStatus }) {
   );
 }
 
-function Input({ value, onChange }) {
+function Input({ value, handleChange }) {
   return (
     <input
       type="text"
       value={value}
-      onChange={onChange}
+      onChange={handleChange}
+      placeholder='Continuar a leitura (Casa de Folhas)'
     >
     </input>
   );
@@ -86,16 +87,27 @@ function App() {
   }
 
   return (
-    <>
-      <Header title={"Lista de tarefas"} />
-
-      <Input
-        value={inputValue}
-        onChange={handleChange}
-      />
-      <AddTaskButton onClick={handleSubmit} />
-      <ToDoList list={tasks} deleteTask={deleteTask} changeTaskStatus={changeTaskStatus} />
-    </>
+    <div className="todo">
+      <div className="header-container">
+        <Header title={"Lista de tarefas"} />
+      </div>
+      <div className="input-task-container">
+        <Input
+          value={inputValue}
+          handleChange={handleChange}
+        />
+        <div>
+          <AddTaskButton onClick={handleSubmit} />
+        </div>
+      </div>
+      <div className="todo-list-container">
+        <ToDoList
+          list={tasks}
+          deleteTask={deleteTask}
+          changeTaskStatus={changeTaskStatus}
+        />
+      </div>
+    </div>
   );
 }
 
