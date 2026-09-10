@@ -29,9 +29,9 @@ function DeleteTaskButton({ deleteTask }) {
   );
 }
 
-function DeleteCompletedTasksButton() {
+function DeleteCompletedTasksButton({ deleteCompletedTasks }) {
   return (
-    <button>Excluir concluídas</button>
+    <button onClick={deleteCompletedTasks}>Excluir concluídas</button>
   )
 }
 
@@ -118,6 +118,10 @@ function App() {
     );
   }
 
+  function deleteCompletedTasks() {
+    setTasks(tasks.filter((task) => !task.completed));
+  }
+
   const completedTasks = tasks.filter((task) => task.completed).length;
   const pendingTasks = tasks.filter((task) => !task.completed).length;
 
@@ -146,7 +150,9 @@ function App() {
           className="info-pending-tasks"
         />
       </div>
-      <DeleteCompletedTasksButton />
+      <div>
+        <DeleteCompletedTasksButton deleteCompletedTasks={deleteCompletedTasks} />
+      </div>
       <div className="todo-list-container">
         <ToDoList
           list={tasks}
