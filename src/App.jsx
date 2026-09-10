@@ -67,7 +67,11 @@ function App() {
 
   const handleSubmit = () => {
     const uuid = crypto.randomUUID();
-    setTasks([...tasks, { id: uuid, task: inputValue, completed: false }]);
+    if (inputValue.trim() === '') {
+      alert('Digite uma tarefa para adicinar a lista');
+    } else {
+      setTasks([...tasks, { id: uuid, task: inputValue, completed: false }]);
+    }
     setInputValue('');
   };
 
