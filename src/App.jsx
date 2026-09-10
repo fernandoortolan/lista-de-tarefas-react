@@ -9,9 +9,11 @@ function Header({ title }) {
   );
 }
 
-function Info() {
+function Info({ content, className }) {
   return (
-    <p className="info-completed-tasks">Tarefas concluídas: 0</p>
+    <p className={className}>
+      {content}
+    </p>
   );
 }
 
@@ -111,7 +113,10 @@ function App() {
         </div>
       </div>
       <div className="info-container">
-        <Info />
+        <Info
+          content={"Tarefas concluídas: 0"}
+          className="info-completed-tasks"
+        />
       </div>
       <div className="todo-list-container">
         <ToDoList
