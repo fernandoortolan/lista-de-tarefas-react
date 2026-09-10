@@ -98,6 +98,8 @@ function App() {
     );
   }
 
+  const completedTasks = tasks.filter((task) => task.completed).length;
+
   return (
     <div className="todo">
       <div className="header-container">
@@ -114,7 +116,7 @@ function App() {
       </div>
       <div className="info-container">
         <Info
-          content={"Tarefas concluídas: 0"}
+          content={"Tarefas concluídas: " + completedTasks}
           className="info-completed-tasks"
         />
       </div>
