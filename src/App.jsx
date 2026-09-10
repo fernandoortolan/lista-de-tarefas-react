@@ -47,13 +47,13 @@ function ToDoList({ list, deleteTask, changeTaskStatus }) {
   );
 }
 
-function Input({ value, handleChange }) {
+function Input({ value, handleChange, placeholder }) {
   return (
     <input
       type="text"
       value={value}
       onChange={handleChange}
-      placeholder='Continuar a leitura (Casa de Folhas)'
+      placeholder={placeholder}
     >
     </input>
   );
@@ -68,6 +68,19 @@ function AddTaskButton({ onClick }) {
 function App() {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const placeholders = [
+    "Comprar café",
+    "Levar o gato passear",
+    "Ler por 1 hora",
+    "Ir ao supermercado",
+    "Responder os e-mails",
+    "Fazer exercícios",
+    "Lavar a louça",
+    "Pagar a conta de luz",
+    "Organizar o quarto",
+    "Terminar o projeto"
+  ];
+  const [placeholder, setPlaceholder] = useState(placeholders[Math.floor(Math.random() * placeholders.length)]);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -81,6 +94,7 @@ function App() {
       setTasks([...tasks, { id: uuid, task: inputValue, completed: false }]);
     }
     setInputValue('');
+    setPlaceholder(placeholders[Math.floor(Math.random() * placeholders.length)]);
   };
 
   function deleteTask(id) {
@@ -110,6 +124,7 @@ function App() {
         <Input
           value={inputValue}
           handleChange={handleChange}
+          placeholder={placeholder}
         />
         <div>
           <AddTaskButton onClick={handleSubmit} />
