@@ -29,6 +29,12 @@ function DeleteTaskButton({ deleteTask }) {
   );
 }
 
+function DeleteCompletedTasksButton() {
+  return (
+    <button>Excluir concluídas</button>
+  )
+}
+
 function ToDoList({ list, deleteTask, changeTaskStatus }) {
   const listItems = list.map((item) =>
     <li key={item.id} className="task">
@@ -140,6 +146,7 @@ function App() {
           className="info-pending-tasks"
         />
       </div>
+      <DeleteCompletedTasksButton />
       <div className="todo-list-container">
         <ToDoList
           list={tasks}
