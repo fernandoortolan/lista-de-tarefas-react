@@ -25,13 +25,19 @@ function Checkbox({ changeTaskStatus }) {
 
 function DeleteTaskButton({ deleteTask }) {
   return (
-    <button onClick={deleteTask}>Excluir</button>
+    <button className="delete-button" onClick={deleteTask}>Excluir</button>
   );
 }
 
 function DeleteCompletedTasksButton({ deleteCompletedTasks }) {
   return (
     <button onClick={deleteCompletedTasks}>Excluir concluídas</button>
+  )
+}
+
+function EditTaskButton() {
+  return (
+    <button className="edit-button">Editar</button>
   )
 }
 
@@ -42,7 +48,10 @@ function ToDoList({ list, deleteTask, changeTaskStatus }) {
         <Checkbox changeTaskStatus={() => changeTaskStatus(item.id)} />
         <span className={item.completed ? 'checked' : ''}>{item.task}</span>
       </div>
-      <DeleteTaskButton deleteTask={() => deleteTask(item.id)} />
+      <div className="task-buttons">
+        <EditTaskButton />
+        <DeleteTaskButton deleteTask={() => deleteTask(item.id)} />
+      </div>
     </li>
   );
 
