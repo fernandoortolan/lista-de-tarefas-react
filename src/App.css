@@ -129,7 +129,7 @@
   color: #8a919b;
 }
 
-/* ESPAÇAMENTO */
+/* TAREFA */
 
 .task {
   display: flex;
@@ -162,11 +162,9 @@
   cursor: pointer;
 }
 
-.task button {
+.task-buttons button {
   border: none;
   background: none;
-
-  color: #d64545;
 
   font-family: inherit;
   font-weight: 600;
@@ -174,6 +172,18 @@
   cursor: pointer;
 }
 
-.task button:hover {
+.delete-button {
+  color: #d64545;
+}
+
+.delete-button:hover {
   color: #a83232;
+}
+
+.edit-button {
+  color: #e0a800;
+}
+
+.edit-button:hover {
+  color: #c69500;
 }
