@@ -32,16 +32,50 @@ function DeleteTaskButton({ deleteTask }) {
 function DeleteCompletedTasksButton({ deleteCompletedTasks }) {
   return (
     <button onClick={deleteCompletedTasks}>Excluir concluídas</button>
-  )
+  );
 }
 
 function EditTaskButton() {
   return (
     <button className="edit-button">Editar</button>
+  );
+}
+
+function ConfirmDeleteTaskModal({ task, deleteTask, toggleModal, id }) {
+  return (
+    <>
+      <div className="modal-overlay"></div>
+
+      <div className="todo confirm-delete-modal">
+        <h2>Confirmação de exclusão</h2>
+        <p>{task}</p>
+        <p>Tem certeza que deseja excluir esta tarefa?</p>
+        <div className="modal-buttons">
+          <ToggleModalButton
+            content="Cancelar"
+            toggleModal={toggleModal}
+            id={id}
+          />
+          <DeleteTaskButton deleteTask={() => deleteTask(id)} />
+        </div>
+      </div>
+    </>
+  );
+}
+
+function ToggleModalButton({ content, toggleModal, id }) {
+  return (
+    <button onClick={() => toggleModal(id)}>{content}</button>
   )
 }
 
 function ToDoList({ list, deleteTask, changeTaskStatus }) {
+  const [enabledDeleteTaskModal, setEnabledDeleteTaskModal] = useState(null);
+
+  function handleClickToggleDeleteTaskModal(id) {
+    setEnabledDeleteTaskModal(enabledDeleteTaskModal === id ? null : id);
+  }
+
   const listItems = list.map((item) =>
     <li key={item.id} className="task">
       <div className="task-content">
@@ -50,8 +84,22 @@ function ToDoList({ list, deleteTask, changeTaskStatus }) {
       </div>
       <div className="task-buttons">
         <EditTaskButton />
-        <DeleteTaskButton deleteTask={() => deleteTask(item.id)} />
+        <ToggleModalButton
+          content="Excluir"
+          toggleModal={handleClickToggleDeleteTaskModal}
+          id={item.id}
+        />
       </div>
+      {
+        enabledDeleteTaskModal === item.id && (
+          <ConfirmDeleteTaskModal
+            task={item.task}
+            deleteTask={deleteTask}
+            id={item.id}
+            toggleModal={handleClickToggleDeleteTaskModal}
+          />
+        )
+      }
     </li>
   );
 

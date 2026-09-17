@@ -15,6 +15,91 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* MODAL */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background-color: rgba(0, 0, 0, 0.2);
+
+  z-index: 999;
+}
+
+.confirm-delete-modal {
+  max-width: 26rem;
+  margin: 0;
+  padding: 1.5rem;
+
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+
+  text-align: left;
+  z-index: 1000;
+}
+
+.confirm-delete-modal h2 {
+  margin: 0 0 16px;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.confirm-delete-modal p {
+  margin: 0 0 32px;
+  color: #444;
+}
+
+.confirm-delete-modal p:first-of-type {
+  margin: 0 0 16px;
+  color: #d64545;
+
+  overflow-wrap: anywhere;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.modal-buttons button {
+  height: 2.5rem;
+
+  background-color: #efefef;
+  color: inherit;
+
+  border: none;
+  border-radius: 64px;
+
+  padding: 4px 18px;
+
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.modal-buttons button:hover {
+  background-color: #dcdcdc;
+}
+
+.modal-buttons button:active {
+  transform: scale(0.98);
+}
+
+.modal-buttons .delete-button {
+  color: #fff;
+  background-color: #d64545;
+}
+
+.modal-buttons .delete-button:hover {
+  background-color: #a83232;
+}
+
 /* HEADER */
 
 .header-container {
@@ -172,11 +257,21 @@
   cursor: pointer;
 }
 
-.delete-button {
+.task-buttons button {
+  border: none;
+  background: none;
+
+  font-family: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.task-buttons button:last-child {
   color: #d64545;
 }
 
-.delete-button:hover {
+.task-buttons button:last-child:hover {
   color: #a83232;
 }
 
