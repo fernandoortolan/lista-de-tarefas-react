@@ -115,7 +115,7 @@
 .input-task-container {
   display: flex;
   gap: 0.75rem;
-  margin-block: 0 2rem;
+  margin-block: 0 1rem;
 }
 
 .input-task-container input {
@@ -178,22 +178,57 @@
 
 .info-container {
   display: flex;
-  /* flex-direction: column; */
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
   margin-block: 0 18px;
 }
 
 .info-container p {
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.info-completed-tasks-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .info-completed-tasks {
-  color: green;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 4px 8px;
+  background-color: #dcfce7;
+  border-radius: 64px;
+  color: #15803d;
+}
+
+.delete-completed-button {
+  padding: 4px 8px;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+  border-radius: 64px;
+}
+
+.delete-completed-button:hover {
+  color: #d64545;
+  background-color: #fef2f2;
 }
 
 .info-pending-tasks {
-  color: blue;
+  padding: 4px 8px;
+  background-color: #fef3c7;
+  border-radius: 64px;
+  color: #b45309;
 }
 
 /* LISTA */

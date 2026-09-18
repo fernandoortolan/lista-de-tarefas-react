@@ -31,7 +31,7 @@ function DeleteTaskButton({ deleteTask }) {
 
 function DeleteCompletedTasksButton({ deleteCompletedTasks }) {
   return (
-    <button onClick={deleteCompletedTasks}>Excluir concluídas</button>
+    <button className="delete-completed-button" onClick={deleteCompletedTasks}>Excluir concluídas</button>
   );
 }
 
@@ -198,17 +198,17 @@ function App() {
         </div>
       </div>
       <div className="info-container">
-        <Info
-          content={"Tarefas concluídas: " + completedTasks}
-          className="info-completed-tasks"
-        />
+        <div className="info-completed-tasks-container">
+          <Info
+            content={"Tarefas concluídas: " + completedTasks}
+            className="info-completed-tasks"
+          />
+          <DeleteCompletedTasksButton deleteCompletedTasks={deleteCompletedTasks} />
+        </div>
         <Info
           content={"Tarefas pendentes: " + pendingTasks}
           className="info-pending-tasks"
         />
-      </div>
-      <div>
-        <DeleteCompletedTasksButton deleteCompletedTasks={deleteCompletedTasks} />
       </div>
       <div className="todo-list-container">
         <ToDoList
