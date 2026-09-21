@@ -26,7 +26,8 @@
   z-index: 999;
 }
 
-.confirm-delete-modal {
+.confirm-delete-modal,
+.confirm-delete-completed-tasks-modal {
   max-width: 26rem;
   margin: 0;
   padding: 1.5rem;
@@ -39,13 +40,15 @@
   z-index: 1000;
 }
 
-.confirm-delete-modal h2 {
+.confirm-delete-modal h2,
+.confirm-delete-completed-tasks-modal h2 {
   margin: 0 0 16px;
   font-size: 1.125rem;
   font-weight: 400;
 }
 
-.confirm-delete-modal p {
+.confirm-delete-modal p,
+.confirm-delete-completed-tasks-modal p {
   margin: 0 0 32px;
   color: #444;
 }

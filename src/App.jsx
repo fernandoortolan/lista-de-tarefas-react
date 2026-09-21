@@ -29,13 +29,11 @@ function DeleteTaskButton({ deleteTask }) {
   );
 }
 
-/*
 function DeleteCompletedTasksButton({ deleteCompletedTasks }) {
   return (
-    <button className="delete-completed-button" onClick={deleteCompletedTasks}>Excluir concluídas</button>
+    <button className="delete-button" onClick={deleteCompletedTasks}>Excluir concluídas</button>
   );
 }
- */
 
 function EditTaskButton() {
   return (
@@ -46,12 +44,6 @@ function EditTaskButton() {
 function ToggleModalButton({ content, toggleModal, id }) {
   return (
     <button onClick={() => toggleModal(id)}>{content}</button>
-  )
-}
-
-function ToggleModalDeleteCompletedTasksButton({ content, toggleModal }) {
-  return (
-    <button className="delete-completed-button" onClick={() => toggleModal}>{content}</button>
   );
 }
 
@@ -71,6 +63,32 @@ function ConfirmDeleteTaskModal({ task, deleteTask, toggleModal, id }) {
             id={id}
           />
           <DeleteTaskButton deleteTask={() => deleteTask(id)} />
+        </div>
+      </div>
+    </>
+  );
+}
+
+function ToggleModalDeleteCompletedTasksButton({ content, toggleModal }) {
+  return (
+    <button className="delete-completed-button" onClick={toggleModal}>{content}</button>
+  );
+}
+
+function ConfirmDeleteCompletedTasksModal({ toggleModal, deleteCompletedTasks }) {
+  return (
+    <>
+      <div className="modal-overlay"></div>
+
+      <div className="todo confirm-delete-completed-tasks-modal">
+        <h2>Confirmação de exclusão</h2>
+        <p>Tem certeza que deseja excluir as tarefas concluídas?</p>
+        <div className="modal-buttons">
+          <ToggleModalDeleteCompletedTasksButton
+            content="Cancelar"
+            toggleModal={toggleModal}
+          />
+          <DeleteCompletedTasksButton deleteCompletedTasks={deleteCompletedTasks} />
         </div>
       </div>
     </>
@@ -183,11 +201,20 @@ function App() {
     );
   }
 
-  /*
+  const [enabledDeleteCompletedTasksModal, setEnabledDeleteCompletedTasksModal] = useState(null);
+
+  function handleClickToggleModalDeleteCompletedTasks() {
+    setEnabledDeleteCompletedTasksModal(enabledDeleteCompletedTasksModal === null ? true : null);
+  }
+
   function deleteCompletedTasks() {
     setTasks(tasks.filter((task) => !task.completed));
   }
-   */
+
+  const handleClickDeleteCompletedTasks = () => {
+    deleteCompletedTasks();
+    handleClickToggleModalDeleteCompletedTasks();
+  }
 
   const completedTasks = tasks.filter((task) => task.completed).length;
   const pendingTasks = tasks.filter((task) => !task.completed).length;
@@ -213,14 +240,24 @@ function App() {
             content={"Tarefas concluídas: " + completedTasks}
             className="info-completed-tasks"
           />
-          <ToggleModalDeleteCompletedTasksButton content="Excluir concluídas" />
-          {/* <DeleteCompletedTasksButton deleteCompletedTasks={deleteCompletedTasks} /> */}
+          <ToggleModalDeleteCompletedTasksButton
+            content="Excluir concluídas"
+            toggleModal={handleClickToggleModalDeleteCompletedTasks}
+          />
         </div>
         <Info
           content={"Tarefas pendentes: " + pendingTasks}
           className="info-pending-tasks"
         />
       </div>
+      {
+        enabledDeleteCompletedTasksModal && (
+          <ConfirmDeleteCompletedTasksModal
+            toggleModal={handleClickToggleModalDeleteCompletedTasks}
+            deleteCompletedTasks={handleClickDeleteCompletedTasks}
+          />
+        )
+      }
       <div className="todo-list-container">
         <ToDoList
           list={tasks}
