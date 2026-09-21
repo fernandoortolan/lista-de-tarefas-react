@@ -239,7 +239,9 @@ function App() {
     "Organizar o quarto",
     "Terminar o projeto"
   ];
-  const [placeholder, setPlaceholder] = useState(placeholders[Math.floor(Math.random() * placeholders.length)]);
+  const [placeholder, setPlaceholder] = useState(
+    () => placeholders[Math.floor(Math.random() * placeholders.length)]
+  );
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
