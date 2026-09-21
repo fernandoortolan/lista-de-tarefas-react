@@ -19,7 +19,7 @@ function Info({ content, className }) {
 
 function Checkbox({ changeTaskStatus }) {
   return (
-    <input type="checkbox" onClick={changeTaskStatus} />
+    <input type="checkbox" onChange={changeTaskStatus} />
   );
 }
 
