@@ -264,7 +264,7 @@ function App() {
     setTasks(
       tasks.map((task) => {
         if (task.id === id) {
-          task.completed = task.completed ? false : true;
+          return { ...task, completed: !task.completed };
         }
         return task;
       })
