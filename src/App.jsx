@@ -259,7 +259,7 @@ function App() {
   };
 
   function deleteTask(id) {
-    setTasks(tasks.filter((task) => task.id !== id));
+    setTasks((tasks) => tasks.filter((task) => task.id !== id));
   }
 
   function changeTaskStatus(id) {
@@ -280,7 +280,7 @@ function App() {
   }
 
   function deleteCompletedTasks() {
-    setTasks(tasks.filter((task) => !task.completed));
+    setTasks((tasks) => tasks.filter((task) => !task.completed));
   }
 
   const handleClickDeleteCompletedTasks = () => {
