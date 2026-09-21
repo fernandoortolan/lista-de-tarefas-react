@@ -121,7 +121,7 @@ function ConfirmDeleteTaskModal({ task, deleteTask, toggleModal, id }) {
 
 function ToggleModalDeleteCompletedTasksButton({ content, toggleModal }) {
   return (
-    <button className="delete-completed-button" onClick={toggleModal}>{content}</button>
+    <button onClick={toggleModal}>{content}</button>
   );
 }
 
