@@ -19,7 +19,7 @@ function Info({ content, className }) {
 
 function Checkbox({ changeTaskStatus }) {
   return (
-    <input type="checkbox" onClick={changeTaskStatus}></input>
+    <input type="checkbox" onClick={changeTaskStatus} />
   );
 }
 
@@ -35,9 +35,59 @@ function DeleteCompletedTasksButton({ deleteCompletedTasks }) {
   );
 }
 
-function EditTaskButton() {
+function EditTaskButton({ editTask }) {
   return (
-    <button className="edit-button">Editar</button>
+    <button className="edit-button" onClick={editTask}>Salvar alterações</button>
+  );
+}
+
+function ToggleModalEditTaskButton({ content, toggleModal, id }) {
+  return (
+    <button onClick={() => toggleModal(id)}>{content}</button>
+  );
+}
+
+function ConfirmEditTaskModal({ task, tasks, setTasks, toggleModal, id }) {
+  const [editValue, setEditValue] = useState(task);
+
+  function editTask(id) {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            task: editValue
+          };
+        }
+
+        return task;
+      })
+    );
+
+    toggleModal(id);
+  }
+
+  return (
+    <>
+      <div className="modal-overlay"></div>
+
+      <div className="todo confirm-edit-modal">
+        <h2>Editar tarefa</h2>
+        <input
+          type="text"
+          value={editValue}
+          onChange={(e) => setEditValue(e.target.value)}
+        />
+        <div className="modal-buttons">
+          <ToggleModalButton
+            content="Cancelar"
+            toggleModal={toggleModal}
+            id={id}
+          />
+          <EditTaskButton editTask={() => editTask(id)} />
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -95,11 +145,17 @@ function ConfirmDeleteCompletedTasksModal({ toggleModal, deleteCompletedTasks })
   );
 }
 
-function ToDoList({ list, deleteTask, changeTaskStatus }) {
+function ToDoList({ list, deleteTask, tasks, setTasks, changeTaskStatus }) {
   const [enabledDeleteTaskModal, setEnabledDeleteTaskModal] = useState(null);
 
   function handleClickToggleDeleteTaskModal(id) {
     setEnabledDeleteTaskModal(enabledDeleteTaskModal === id ? null : id);
+  }
+
+  const [enabledEditTaskModal, setEnabledEditTaskModal] = useState(null);
+
+  function handleClickToggleEditTaskModal(id) {
+    setEnabledEditTaskModal(enabledEditTaskModal === id ? null : id);
   }
 
   const listItems = list.map((item) =>
@@ -109,7 +165,11 @@ function ToDoList({ list, deleteTask, changeTaskStatus }) {
         <span className={item.completed ? 'checked' : ''}>{item.task}</span>
       </div>
       <div className="task-buttons">
-        <EditTaskButton />
+        <ToggleModalEditTaskButton
+          content="Editar"
+          toggleModal={handleClickToggleEditTaskModal}
+          id={item.id}
+        />
         <ToggleModalButton
           content="Excluir"
           toggleModal={handleClickToggleDeleteTaskModal}
@@ -123,6 +183,17 @@ function ToDoList({ list, deleteTask, changeTaskStatus }) {
             deleteTask={deleteTask}
             id={item.id}
             toggleModal={handleClickToggleDeleteTaskModal}
+          />
+        )
+      }
+      {
+        enabledEditTaskModal === item.id && (
+          <ConfirmEditTaskModal
+            task={item.task}
+            tasks={tasks}
+            setTasks={setTasks}
+            id={item.id}
+            toggleModal={handleClickToggleEditTaskModal}
           />
         )
       }
@@ -143,8 +214,7 @@ function Input({ value, handleChange, placeholder }) {
       value={value}
       onChange={handleChange}
       placeholder={placeholder}
-    >
-    </input>
+    />
   );
 }
 
@@ -262,6 +332,8 @@ function App() {
         <ToDoList
           list={tasks}
           deleteTask={deleteTask}
+          tasks={tasks}
+          setTasks={setTasks}
           changeTaskStatus={changeTaskStatus}
         />
       </div>

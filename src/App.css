@@ -27,7 +27,8 @@
 }
 
 .confirm-delete-modal,
-.confirm-delete-completed-tasks-modal {
+.confirm-delete-completed-tasks-modal,
+.confirm-edit-modal {
   max-width: 26rem;
   margin: 0;
   padding: 1.5rem;
@@ -41,14 +42,16 @@
 }
 
 .confirm-delete-modal h2,
-.confirm-delete-completed-tasks-modal h2 {
+.confirm-delete-completed-tasks-modal h2,
+.confirm-edit-modal h2 {
   margin: 0 0 16px;
   font-size: 1.125rem;
   font-weight: 400;
 }
 
 .confirm-delete-modal p,
-.confirm-delete-completed-tasks-modal p {
+.confirm-delete-completed-tasks-modal p,
+.confirm-edit-modal p {
   margin: 0 0 32px;
   color: #444;
 }
@@ -103,6 +106,15 @@
   background-color: #a83232;
 }
 
+.modal-buttons .edit-button {
+  color: #fff;
+  background-color: #e0a800;
+}
+
+.modal-buttons .edit-button:hover {
+  background-color: #c69500;
+}
+
 /* HEADER */
 
 .header-container {
@@ -115,13 +127,15 @@
 
 /* INPUT + BOTÃO */
 
-.input-task-container {
+.input-task-container,
+.confirm-edit-modal input {
   display: flex;
   gap: 0.75rem;
   margin-block: 0 1rem;
 }
 
-.input-task-container input {
+.input-task-container input,
+.confirm-edit-modal input {
   height: 42px;
   width: 100%;
 
@@ -140,12 +154,14 @@
   transition: border-color 0.2s, background-color 0.2s;
 }
 
-.input-task-container input:focus {
+.input-task-container input:focus,
+.confirm-edit-modal input:focus {
   background-color: #fff;
   border-color: #087ea4;
 }
 
-.input-task-container input::placeholder {
+.input-task-container input::placeholder,
+.confirm-edit-modal input::placeholder {
   color: #8a919b;
 }
 
@@ -295,16 +311,6 @@
   cursor: pointer;
 }
 
-.task-buttons button {
-  border: none;
-  background: none;
-
-  font-family: inherit;
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
 .task-buttons button:last-child {
   color: #d64545;
 }
@@ -313,10 +319,10 @@
   color: #a83232;
 }
 
-.edit-button {
+.task-buttons button:first-child {
   color: #e0a800;
 }
 
-.edit-button:hover {
+.task-buttons button:first-child:hover {
   color: #c69500;
 }
