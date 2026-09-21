@@ -301,6 +301,11 @@
   cursor: pointer;
 }
 
+.task-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .task-buttons button {
   border: none;
   background: none;
