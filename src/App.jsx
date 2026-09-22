@@ -41,12 +41,6 @@ function EditTaskButton({ editTask }) {
   );
 }
 
-function ToggleModalEditTaskButton({ content, toggleModal, id }) {
-  return (
-    <button onClick={() => toggleModal(id)}>{content}</button>
-  );
-}
-
 function ConfirmEditTaskModal({ task, tasks, setTasks, toggleModal, id }) {
   const [editValue, setEditValue] = useState(task);
 
@@ -165,7 +159,7 @@ function ToDoList({ list, deleteTask, tasks, setTasks, changeTaskStatus }) {
         <span className={item.completed ? 'checked' : ''}>{item.task}</span>
       </div>
       <div className="task-buttons">
-        <ToggleModalEditTaskButton
+        <ToggleModalButton
           content="Editar"
           toggleModal={handleClickToggleEditTaskModal}
           id={item.id}
